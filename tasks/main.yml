@@ -111,13 +111,13 @@
 - name: "Disable the isc-dhcp-server"
   service:
     enabled: false
-    name: "isc-dhcp-server"
+    name: "{{dhcp_service}}"
   become: true
   when: result.changed
 
 - name: "Enable the isc-dhcp-server"
   service:
     enabled: true
-    name: "isc-dhcp-server"
+    name: "{{dhcp_service}}"
   become: true
   when: result.changed
