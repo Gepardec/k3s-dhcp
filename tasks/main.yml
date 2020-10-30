@@ -28,11 +28,21 @@
     loop_var: interface
   tags: dhcp
 
+- name: Check whether dhcp Interfaceconfig is set
+  command: grep -Fxq "INTERFACESv4='{{ dhcp_interface | default(ansible_default_ipv4.interface) }}'" "{{ dhcp_config }}"
+  register: dhcp_interface_value
+  check_mode: no
+  ignore_errors: yes
+  changed_when: no
+
 - name: Set Interface | Set a default listening interface
+  when:
+    dhcp_interface_value.rc == 0
   lineinfile:
     dest: "{{ dhcp_config }}"
     line: 'INTERFACESv4="{{ dhcp_interface | default(ansible_default_ipv4.interface) }}"'
     regexp: '^INTERFACESv4='
+    check_mode: yes
   tags: dhcp
 
 - fail:
