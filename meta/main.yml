@@ -11,10 +11,12 @@ galaxy_info:
         - 8
     - name: Fedora
       versions:
-        - 29
-    - name: Ubuntu
+        - 31
+        - 32
+        - 33
+    - name: Debian
       versions:
-        - bionic
+        - 10
   galaxy_tags:
     - system
     - networking
